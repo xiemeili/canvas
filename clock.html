@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas1" width="400px" height="400px" style="background-color: #ccc;"></canvas>
+	<script type="text/javascript">
+		var can=document.getElementById('canvas1');
+		var c=can.getContext('2d');
+		setInterval(function(){
+			c.clearRect(0,0,400,400)
+			var dates=new Date();
+			var h=dates.getHours();
+			var m=dates.getMinutes();
+			var s=dates.getSeconds();
+			if(h>12){
+				h-=12;
+			}
+			h+=m/60;
+			m+=s/60;
+			c.beginPath();
+			c.arc(200,200,150,0,Math.PI*2);
+			c.strokeStyle='blue';
+			c.stroke();
+			
+			for(var i=0;i<12;i++){
+				c.save();
+				c.beginPath();
+				c.translate(200,200);
+				c.rotate(i*30*Math.PI/180);
+				c.lineWidth=3;
+				c.strokeStyle='black';
+				c.moveTo(0,-150);
+				c.lineTo(0,-130);
+				c.stroke();
+				c.restore();				
+			}
+			
+			for(var i=0;i<60;i++){
+				c.save();
+				c.beginPath();
+				c.translate(200,200);
+				c.rotate(i*6*Math.PI/180);
+				c.strokeStyle='red';
+				c.moveTo(0,-150);
+				c.lineTo(0,-140);
+				c.stroke();
+				c.restore();
+			}
+			
+			//画圆心
+			c.save();
+			c.translate(200,200);
+			c.beginPath();
+			c.arc(0,0,5,0,Math.PI*2);
+			c.stroke();
+			c.restore();
+			
+			//画时针
+			c.save();
+			c.beginPath();
+			c.translate(200,200);
+			c.lineWidth=3;
+			c.strokeStyle='black';
+			c.rotate(h*30*Math.PI/180);
+			c.moveTo(0,-5);
+			c.lineTo(0,-90);
+			c.stroke();
+			c.restore();
+			
+			//画分针
+			c.save();
+			c.beginPath();
+			c.translate(200,200);
+			c.lineWidth=1;
+			c.strokeStyle='grey';
+			c.rotate(m*6*Math.PI/180);
+			c.moveTo(0,-5);
+			c.lineTo(0,-100);
+			c.stroke();
+			c.restore();
+			
+			//画秒针
+			c.save();
+			c.beginPath();
+			c.translate(200,200);
+			c.lineWidth=1;
+			c.strokeStyle='green';
+			c.rotate(s*6*Math.PI/180);
+			c.moveTo(0,-5);
+			c.lineTo(0,-127);
+			c.stroke();
+			c.restore();
+			
+		},1000)
+		
+	</script>
+	</body>
+</html>
